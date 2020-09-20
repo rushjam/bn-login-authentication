@@ -1,10 +1,62 @@
 <h1 class="mt-4">Dashboard</h1>
 <p class="lead mb-3">Welcome <%= name %></p>
-
+<canvas id="myChart"></canvas>
 <div class="input__container">
     <label class="input__label" name="number">Enter your Number:</label>
-    <input class="input__field mx-2" type="number" name="number" value="name" placeholder="Please Enter Valid Number">
-    <button class="btn btn-primary">Chart</button>
+     <input class="input__field mx-2"  type="number" id="ipnum" value="name" placeholder="Please Enter Valid Number">
+    <button class="btn btn-primary" id="h">Chart</button>
+    <a href="users/save" class="btn btn-primary">Save in DB</a>
 </div>
 
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
+    
+<script>
+    var data_value=new Array();
+var h=document.getElementById("h");
+h.addEventListener("click" ,function()
+{
+ data_value.push(document.getElementById("ipnum").value);
+ console.log(document.getElementById("ipnum").value);
+ console.log(data_value);
+ chartshow();
+});    
+var ctx = document.getElementById('myChart').getContext('2d');
+console.log("h");
+function chartshow(){
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: data_value
+        }]
+    },
+
+    // Configuration options go here
+    options: {scales: {
+        yAxes: [{
+            display: true,
+            ticks: {
+                suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                // OR //
+                beginAtZero: true   // minimum value will be 0.
+            }
+        }]
+    }}
+});
+document.getElementById('myChart').style.width='';
+document.getElementById('myChart').style.height='';
+}
+
+
+</script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
+   <!-- <script src="views/JS/layout.js"></script>   -->
