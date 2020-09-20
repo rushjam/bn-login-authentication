@@ -19,7 +19,7 @@ router.get('/register', (req, res) => {
 
 // Registration Handler
 router.post('/register', (req,res) => {
-    // console.log(req.body);
+    console.log(req.body);
 
     const { name, email, password, password2} = req.body;
     errors = [];
@@ -57,7 +57,7 @@ router.post('/register', (req,res) => {
         });
     } else {
         // Validation passed
-        User.findOne({email:email})
+        User.findOne({email:email}) 
         .then(user => {
             if(user) {
                 errors.push({
